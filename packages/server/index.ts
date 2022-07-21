@@ -12,6 +12,12 @@ const appRouter = trpc.router().query("Hello", {
 const app = express();
 const port = 8080;
 
+app.use("/trpc",
+  trpcExpress.createExpressMiddleware({
+    router: appRouter,
+    createContext: () => null,
+  }))
+
 app.get("/", (req, res) => {
   res.send("Hello from server");
 });
